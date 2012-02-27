@@ -1,0 +1,17 @@
+* motion
+  - lets say we have a prior in the form of probability distribution 
+    | 1/9 | 1/3 | 1/3 | 1/9 | 1/9 |
+    | d   |     |     | d   | d   |
+    - and we know the robot moves 1 cell to the right
+    - and that the world is cyclic, returns on itself
+    - what's our posterior probabiltiy distribution
+      - above is the initial belief state of where the robot believes it could be
+      - if it moves to the right by 1 cell
+	- and moving right has P(1) of succeeding
+         | 1/9 | 1/9 | 1/3 | 1/3 | 1/9 |
+         | d   | d   |     |     | d   |
+	  - we're measuring belief of where we are in a world based on landmarks
+	  - so if robot is infront of a door, it doesn'nt neccessarily know
+	    which door. all it knows is the positions of doors
+	  - moving to the right, taking into account what we know of the world
+	    shifts the probabilities by N number of units of motion
