@@ -23,7 +23,6 @@ def sense(p, Z, W, hit, miss, norm=True):
     
 p = pvector(5)
 world = ['green', 'red', 'red', 'green', 'green']
-print sense(p, 'red', world, 0.6, 0.2)
 
 # multiple sensor sweeps
 def sweep_sensors(readings):
@@ -35,19 +34,17 @@ def multi_sense_pvector(sweep_results, p, W, weights):
         pv.extend(sense(p, i, W, weights[0], weights[1]))
     return pv
 
-print "multi sensor sweep"
-print multi_sense_pvector(sweep_sensors(['red', 'green']),
-                          pvector(5),
-                          world,
-                          (0.6, 0.2))
-
 # robot motion quizz
 world = [ 1./9, 1./3, 1./3, 1./9, 1./9 ]
-def move_right(locality, cells, W):
-    state = W.index(locality)
-    new_state = [s for s in W[cells:]]
-    new_state.extend(W[:state+1])
-    return new_state
-    
-print world
-print move_right(world[0], 1, world)
+def move(p, U=0):
+    q = []
+    for i in range(len(p)):
+        # this part is wierd, think not of p being shifted to the right
+        # think of q acquiring information from cells in p
+        # each cell in q has to grab its value from the cell in p that
+        # is to the left
+        q.append(p[(i-U) % len(p)])
+    return q
+
+print world    
+print move(world,2)
