@@ -48,3 +48,25 @@ def move(p, U=0):
 
 print world    
 print move(world,2)
+
+world = [0.2,0.2,0.2,0.2]
+print world
+print move(world,2)
+
+
+print "inexact motion"
+pExact = 0.8
+pOvershoot = 0.1
+pUndershoot = 0.1
+
+def move(p, U=0):
+    q = []
+    for i in range(len(p)):
+        # the total probability of state s
+        s = pExact * p[(i-U) % len(p)]
+        s = s + pOvershoot * p[(i-U-1) % len(p)]
+        s = s + pUndershoot * p[(i-U+1) % len(p)]
+        q.append(s)
+    return q
+
+print move([0, 1, 0, 0, 0],1)

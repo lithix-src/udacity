@@ -1,0 +1,28 @@
+* kalman filters
+
+** guassian 
+   where mu is the mean of the modal and sigma**2 is the width (variance)
+   
+   where quadratic difference x is the query point relative to the mean mu
+   f(x) = 1/sqr(2 * pi * sigma**2) * exp*1/2((x - mu)**2/sigma**2)
+   #+BEGIN_SRC python
+     import math as m
+     
+     def f(x, mu, sigma_sq):
+         temp = ((x - mu)**2)/sigma_sq
+         temp = m.exp(-.5 * temp)
+     
+         # normalization
+         temp = 1/m.sqrt(2 * m.pi * sigma_sq) * temp
+         return temp
+     
+   #+END_SRC
+
+   - unimodal
+     when graphed only 1 peak
+   - continuous function over the knowledge space
+   - area under the curve sums to 1
+   - our goal in using kalman filters is to maintain a mu and sigma**2 of where we think our location is
+   - if x = mu, then enum becomes 0, and x of 0 = 1
+
+** 
